@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Allunaggio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="game">
+    <div id="stars"></div>
+    <div id="lander">
+      <div id="window"></div>
+      <div id="flame"></div>
+      <div id="left-flame" class="side-flame"></div>
+      <div id="right-flame" class="side-flame"></div>
+      <div id="fin-left" class="fin"></div>
+      <div id="fin-right" class="fin"></div>
+    </div>
+    <div id="surface"></div>
+    <div id="target">H</div>
+    <div id="asteroid-container"></div>
+    <div id="info">
+      <p>Velocità: <span id="speed">0</span></p>
+      <p>Motore: <span id="engine">OFF</span></p>
+      <p>Carburante: <span id="fuel">100</span></p>
+      <p>Punteggio: <span id="score">0</span></p>
+      <p id="message"></p>
+    </div>
+  </div>
+
+  <audio id="engine-sound" src="https://actions.google.com/sounds/v1/ambiences/rocket_whoosh.ogg" preload="auto"></audio>
+  <audio id="collision-sound" src="https://actions.google.com/sounds/v1/vehicles/vehicle_collision_2.ogg" preload="auto"></audio>
+  <audio id="landing-success-sound" src="https://actions.google.com/sounds/v1/alarms/success_tone.ogg" preload="auto"></audio>
+  <audio id="fuel-empty-sound" src="https://actions.google.com/sounds/v1/alarms/buzzer.ogg" preload="auto"></audio>
+
+  <script src="game.js"></script>
+</body>
+</html>

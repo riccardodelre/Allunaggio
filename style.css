@@ -1,0 +1,157 @@
+ body {
+      margin: 0;
+      background: #000;
+      color: white;
+      font-family: sans-serif;
+      overflow: hidden;
+    }
+
+    #game {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+      background: radial-gradient(#000 60%, #111);
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      opacity: 0.8;
+      border-radius: 50%;
+    }
+
+    #lander {
+      width: 60px;
+      height: 120px;
+      position: absolute;
+      bottom: 90%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      border-radius: 50% 50% 20% 20%;
+      border: 5px solid #FF4D4D;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #window {
+      width: 20px;
+      height: 20px;
+      background: #0cf;
+      border-radius: 50%;
+      position: absolute;
+      top: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 0 8px #0cf;
+    }
+
+    #flame, .side-flame {
+      background: radial-gradient(circle at 50% 0%, yellow, orange, red);
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.9;
+      animation: flicker 0.2s infinite;
+      display: none;
+    }
+
+    #flame {
+      width: 30px;
+      height: 50px;
+      bottom: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 0 15px orange;
+    }
+
+    .side-flame {
+      width: 20px;
+      height: 40px;
+      bottom: -10px;
+      box-shadow: 0 0 10px red;
+    }
+
+    #left-flame { left: -25px; }
+    #right-flame { right: -25px; }
+
+    @keyframes flicker {
+      0% { transform: scaleY(1) scaleX(1) translateX(-50%); opacity: 1; }
+      50% { transform: scaleY(1.3) scaleX(0.8) translateX(-50%); opacity: 0.8; }
+      100% { transform: scaleY(1) scaleX(1.1) translateX(-50%); opacity: 1; }
+    }
+
+    .fin {
+      width: 25px;
+      height: 35px;
+      background: red;
+      position: absolute;
+      bottom: 15px;
+      transform: rotate(45deg);
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+    }
+
+    #fin-left {
+      left: -20px;
+    }
+
+    #fin-right {
+      right: -20px;
+    }
+
+    #surface {
+      position: absolute;
+      bottom: 0;
+      height: 30px;
+      width: 100%;
+      background: #333;
+      border-top: 3px solid #666;
+    }
+
+    #target {
+      position: absolute;
+      bottom: 25px;
+      width: 80px;
+      height: 20px;
+      background: #666;
+      border: 2px solid #aaa;
+      text-align: center;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 20px;
+      box-shadow: 0 0 8px rgba(255,255,255,0.3);
+      transform: translateX(-50%);
+    }
+
+    #info {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 14px;
+    }
+
+    #info p {
+      margin: 3px 0;
+    }
+
+    #asteroid-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .asteroid {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background: radial-gradient(circle at 20% 20%, #999, #444 70%);
+      border-radius: 50%;
+      box-shadow: inset -5px -5px 10px #222;
+      border: 2px solid #222;
+    }
