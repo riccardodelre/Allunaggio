@@ -26,14 +26,15 @@ const lander = document.getElementById("lander");
     let position = 90;
     let speed = 0;
     let horizontalSpeed = 0;
-    let gravity = 0.0008;
-    let thrust = -0.002;
+    let gravity = 0.0016;   // aumenta la gravità
+    let thrust = -0.003;    // aumenta la potenza del propulsore (più negativo = più spinta)
     let engineOn = false;
     let movingLeft = false;
     let movingRight = false;
     let gameOver = false;
     let score = 0;
     let fuel = 100;
+    let waitingToStart = false; // aggiungi questa variabile globale
 
     let targetPosition = Math.random() * 80 + 10;
     target.style.left = targetPosition + "%";
@@ -72,6 +73,14 @@ const lander = document.getElementById("lander");
     let lateralThrust = 0.002;
 
     window.addEventListener("keydown", (e) => {
+      if (waitingToStart && e.code === "Space") {
+        waitingToStart = false;
+        engineOn = true;
+        requestAnimationFrame(update);
+        return;
+      }
+      if (waitingToStart) return; // ignora altri tasti finché non si parte
+
       if (fuel <= 0) {
         fuelEmptySound.play();
         return;
@@ -98,7 +107,8 @@ const lander = document.getElementById("lander");
     });
 
     function update() {
-      if (gameOver) return;
+      if (gameOver) return; // <-- PRIMA controlla se il gioco è finito
+      message.textContent = ''; // <-- POI cancella il messaggio solo se il gioco continua
       let acc = gravity;
       if (engineOn && fuel > 0) {
         acc += thrust;
@@ -142,8 +152,18 @@ const lander = document.getElementById("lander");
         }
       }
 
-      if (position <= 0) {
-        position = 0;
+      // Sostituisci il controllo atterraggio con questo:
+      const surfaceHeight = 80; // deve essere uguale all'altezza di #surface in px
+const minPosition = (surfaceHeight / window.innerHeight) * 100;
+
+// Calcola la posizione in pixel dal fondo
+      const landerRect = lander.getBoundingClientRect();
+      const gameRect = document.getElementById('game').getBoundingClientRect();
+      const landerBottomFromGame = gameRect.bottom - landerRect.bottom;
+
+      if (landerBottomFromGame <= surfaceHeight) {
+        // La navicella ha toccato o superato il terreno
+        position = minPosition;
         gameOver = true;
         engineSound.pause();
         const landingPosition = lander.offsetLeft + lander.offsetWidth / 2;
@@ -152,9 +172,13 @@ const lander = document.getElementById("lander");
         if (distance < 30 && speed < 0.03) {
           landingSuccessSound.play();
           message.textContent = "Atterraggio perfetto!";
+          message.style.color = "yellow";
+          message.style.fontSize = "2.5em";
           score = Math.max(0, 100 - (distance / 5));
         } else {
-          message.textContent = "Atterraggio fallito!";
+          message.textContent = "MISSION FAILED";
+          message.style.color = "red";
+          message.style.fontSize = "2.5em";
           score = 0;
         }
         scoreDisplay.textContent = score.toFixed(0);
@@ -173,4 +197,38 @@ const lander = document.getElementById("lander");
       requestAnimationFrame(update);
     }
 
-    update(); 
+    function resetLander() {
+      position = 90;
+      speed = 0;
+      horizontalSpeed = 0;
+      fuel = 100;
+      engineOn = false;
+      movingLeft = false;
+      movingRight = false;
+      gameOver = false;
+      score = 0;
+      waitingToStart = true; // il gioco aspetta la pressione di spazio
+
+      // Posiziona il lander centrato orizzontalmente
+      lander.style.left = (window.innerWidth / 2 - lander.offsetWidth / 2) + "px";
+      lander.style.bottom = position + "%";
+
+      // Reset testo info
+      speedDisplay.textContent = '0';
+      fuelDisplay.textContent = '100';
+      engineDisplay.textContent = 'OFF';
+      message.textContent = 'Premi SPAZIO per iniziare!';
+      message.style.fontSize = "1.5em";
+      message.style.color = "#fff"; // <--- aggiungi questa riga
+      scoreDisplay.textContent = '0';
+
+      // Reset target e asteroidi
+      targetPosition = Math.random() * 80 + 10;
+      target.style.left = targetPosition + "%";
+      createAsteroids();
+    }
+
+    function startGame() {
+      resetLander();
+      // NON chiamare update qui!
+    }

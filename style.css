@@ -1,4 +1,4 @@
- body {
+body {
       margin: 0;
       background: #000;
       color: white;
@@ -90,30 +90,36 @@
       background: red;
       position: absolute;
       bottom: 15px;
-      transform: rotate(45deg);
       box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+      border-radius: 6px;
     }
 
+    /* Sinistra: ruota verso sinistra */
     #fin-left {
-      left: -20px;
+      left: -22px;
+      transform: rotate(45deg);    /* Da -45deg a 45deg: verso il basso a sinistra */
     }
 
+    /* Destra: ruota verso destra */
     #fin-right {
-      right: -20px;
+      right: -22px;
+      transform: rotate(-45deg);   /* Da 45deg a -45deg: verso il basso a destra */
     }
 
     #surface {
       position: absolute;
+      left: 0;
       bottom: 0;
-      height: 30px;
       width: 100%;
-      background: #333;
-      border-top: 3px solid #666;
+      height: 80px; /* o l'altezza che preferisci */
+      background: url('suolo.png') center bottom / cover no-repeat;
+      z-index: 1;
     }
 
     #target {
       position: absolute;
-      bottom: 25px;
+      bottom: 80px; /* deve essere uguale all'altezza del terreno */
+      left: 50%;
       width: 80px;
       height: 20px;
       background: #666;
@@ -125,6 +131,7 @@
       line-height: 20px;
       box-shadow: 0 0 8px rgba(255,255,255,0.3);
       transform: translateX(-50%);
+      z-index: 2;
     }
 
     #info {
@@ -150,8 +157,49 @@
       position: absolute;
       width: 50px;
       height: 50px;
-      background: radial-gradient(circle at 20% 20%, #999, #444 70%);
+      background: url('meteora.png') center center / contain no-repeat;
       border-radius: 50%;
-      box-shadow: inset -5px -5px 10px #222;
-      border: 2px solid #222;
+      box-shadow: none;
+      border: none;
+    }
+
+    #menu {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url('space-ship.jpg') center center / cover no-repeat;
+      color: #0f0e0e;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    #menu h1 {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 3em;
+      margin-bottom: 1em;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #fff;
+      text-shadow: 2px 2px 8px #000, 0 0 8px #00f;
+    }
+    #start-btn {
+      font-size: 1.5em;
+      padding: 0.5em 2em;
+      cursor: pointer;
+    }
+
+    #message {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Press Start 2P', monospace;
+      font-size: 1.5em;
+      color: #fff;
+      text-shadow: 2px 2px 8px #000, 0 0 8px #00f;
+      text-align: center;
+      width: 90vw;
+      pointer-events: none;
+      z-index: 2000;
     }
