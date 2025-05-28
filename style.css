@@ -117,7 +117,8 @@ body {
       bottom: 0;
       width: 100%;
       height: 80px; /* o l'altezza che preferisci */
-      background: url('suolo.png') center bottom / cover no-repeat;
+      background: url('suolo.png') repeat-x left bottom;
+      background-size: auto 100%; /* l'altezza resta 80px, la larghezza si adatta */
       z-index: 1;
     }
 
