@@ -164,17 +164,17 @@ const lander = document.getElementById("lander");
         }
       }
 
-      // Sostituisci il controllo atterraggio con questo:
-      const surfaceHeight = 80; // deve essere uguale all'altezza di #surface in px
+      
+      const surfaceHeight = 80; 
 const minPosition = (surfaceHeight / window.innerHeight) * 100;
 
-// Calcola la posizione in pixel dal fondo
+
       const landerRect = lander.getBoundingClientRect();
       const gameRect = document.getElementById('game').getBoundingClientRect();
       const landerBottomFromGame = gameRect.bottom - landerRect.bottom;
 
       if (landerBottomFromGame <= surfaceHeight) {
-        // La navicella ha toccato o superato il terreno
+        
         position = minPosition;
         gameOver = true;
         waitingToRestart = true;
@@ -213,7 +213,7 @@ const minPosition = (surfaceHeight / window.innerHeight) * 100;
     }
 
     function resetLander() {
-      position = 70; // era 90
+      position = 70; 
       speed = 0;
       horizontalSpeed = 0;
       fuel = 100;
@@ -225,11 +225,11 @@ const minPosition = (surfaceHeight / window.innerHeight) * 100;
       waitingToStart = true;
       waitingToRestart = false;
 
-      // Posiziona il lander centrato orizzontalmente
+      
       lander.style.left = (window.innerWidth / 2 - lander.offsetWidth / 2) + "px";
       lander.style.bottom = position + "%";
 
-      // Reset testo info
+      
       speedDisplay.textContent = '0';
       fuelDisplay.textContent = '100';
       engineDisplay.textContent = 'OFF';
@@ -238,12 +238,12 @@ const minPosition = (surfaceHeight / window.innerHeight) * 100;
       message.style.color = "#fff";
       scoreDisplay.textContent = '0';
 
-      // Reset target e asteroidi
+      
       targetPosition = Math.random() * 80 + 10;
       target.style.left = targetPosition + "%";
       createAsteroids();
 
-      // Avvia animazione asteroidi anche qui
+      
       animateAsteroids();
     }
 
@@ -256,5 +256,5 @@ const minPosition = (surfaceHeight / window.innerHeight) * 100;
     function startGame() {
       resetLander();
       animateAsteroids();
-      // NON chiamare update qui!
+      
     }

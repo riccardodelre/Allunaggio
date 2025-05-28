@@ -23,31 +23,31 @@ body {
     }
 
     #lander {
-      width: 45px;    /* era 60px */
-      height: 90px;   /* era 120px */
+      width: 45px;    
+      height: 90px;  
       position: absolute;
-      bottom: 70%;    /* abbassato per vederlo intero */
+      bottom: 70%;    
       left: 50%;
       transform: translateX(-50%);
       background: white;
       border-radius: 50% 50% 20% 20%;
-      border: 3.75px solid #FF4D4D; /* era 5px */
-      box-shadow: 0 0 11.25px rgba(255, 255, 255, 0.3); /* era 15px */
+      border: 3.75px solid #FF4D4D; 
+      box-shadow: 0 0 11.25px rgba(255, 255, 255, 0.3); 
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
     #window {
-      width: 13.5px;    /* era 18px */
-      height: 13.5px;   /* era 18px */
+      width: 13.5px;    
+      height: 13.5px;   
       background: #0cf;
       border-radius: 50%;
       position: absolute;
-      top: 10px;        /* adattato */
+      top: 10px;       
       left: 50%;
       transform: translateX(-50%);
-      box-shadow: 0 0 6px #0cf; /* era 8px */
+      box-shadow: 0 0 6px #0cf; 
     }
 
     #flame, .side-flame {
@@ -60,27 +60,27 @@ body {
     }
 
     #flame {
-      width: 13.5px;    /* era 18px */
-      height: 20.25px;  /* era 27px */
-      bottom: -20.25px; /* era -27px */
+      width: 13.5px;    
+      height: 20.25px;  
+      bottom: -20.25px; 
       left: 50%;
       transform: translateX(-50%);
-      box-shadow: 0 0 11.25px orange; /* era 15px */
+      box-shadow: 0 0 11.25px orange; 
     }
 
     .side-flame {
-      width: 6.75px;    /* già ridotto */
-      height: 13.5px;   /* già ridotto */
-      bottom: -10px;   /* abbassato rispetto a prima */
+      width: 6.75px;    
+      height: 13.5px;   
+      bottom: -10px;   
       box-shadow: 0 0 7.5px red;
     }
 
     #left-flame {
-      left: -6px;       /* spostato più verso l'esterno rispetto al centro */
+      left: -6px;       
     }
     #right-flame {
       left: auto;
-      right: -14px;      /* spostato più verso l'esterno rispetto al centro */
+      right: -14px;      
     }
 
     @keyframes flicker {
@@ -90,25 +90,25 @@ body {
     }
 
     .fin {
-      width: 14px;      /* era 18.75px */
-      height: 19.7px;   /* era 26.25px */
+      width: 14px;      
+      height: 19.7px;   
       background: red;
       position: absolute;
-      bottom: 8.5px;    /* era 11.25px */
-      box-shadow: 0 0 7.5px rgba(255, 0, 0, 0.7); /* era 10px */
-      border-radius: 3.4px; /* era 4.5px */
+      bottom: 8.5px;    
+      box-shadow: 0 0 7.5px rgba(255, 0, 0, 0.7); 
+      border-radius: 3.4px; 
     }
 
-    /* Sinistra: ruota verso sinistra */
+    
     #fin-left {
-      left: -12.5px;    /* era -16.5px */
-      transform: rotate(45deg);    /* Da -45deg a 45deg: verso il basso a sinistra */
+      left: -12.5px;    
+      transform: rotate(45deg);    
     }
 
-    /* Destra: ruota verso destra */
+    
     #fin-right {
-      right: -12.5px;   /* era -16.5px */
-      transform: rotate(-45deg);   /* Da 45deg a -45deg: verso il basso a destra */
+      right: -12.5px;   
+      transform: rotate(-45deg);   
     }
 
     #surface {
@@ -116,15 +116,15 @@ body {
       left: 0;
       bottom: 0;
       width: 100%;
-      height: 80px; /* o l'altezza che preferisci */
+      height: 80px;
       background: url('suolo.png') repeat-x left bottom;
-      background-size: auto 100%; /* l'altezza resta 80px, la larghezza si adatta */
+      background-size: auto 100%; 
       z-index: 1;
     }
 
     #target {
       position: absolute;
-      bottom: 80px; /* deve essere uguale all'altezza del terreno */
+      bottom: 80px; 
       left: 50%;
       width: 100px;
       height: 20px;
