@@ -23,19 +23,19 @@ const lander = document.getElementById("lander");
       starContainer.appendChild(star);
     }
 
-    let position = 90;
+    let position = 70; // era 90
     let speed = 0;
     let horizontalSpeed = 0;
-    let gravity = 0.0016;   // aumenta la gravità
-    let thrust = -0.003;    // aumenta la potenza del propulsore (più negativo = più spinta)
+    let gravity = 0.001;  
+    let thrust = -0.002;    
     let engineOn = false;
     let movingLeft = false;
     let movingRight = false;
     let gameOver = false;
     let score = 0;
     let fuel = 100;
-    let waitingToStart = false; // aggiungi questa variabile globale
-    let waitingToRestart = false; // variabile per gestire l'attesa di riavvio
+    let waitingToStart = false;
+    let waitingToRestart = false; 
 
     let targetPosition = Math.random() * 80 + 10;
     target.style.left = targetPosition + "%";
@@ -74,7 +74,7 @@ const lander = document.getElementById("lander");
     let lateralThrust = 0.002;
 
     window.addEventListener("keydown", (e) => {
-      // Se il gioco è finito e si preme INVIO, torna alla schermata di attesa
+
       if (waitingToRestart && e.code === "Enter") {
         waitingToRestart = false;
         waitingToStart = true;
@@ -82,14 +82,14 @@ const lander = document.getElementById("lander");
         return;
       }
 
-      // Se siamo in attesa di inizio e si preme SPAZIO, parte il gioco
+
       if (waitingToStart && e.code === "Space") {
         waitingToStart = false;
         engineOn = true;
         requestAnimationFrame(update);
         return;
       }
-      if (waitingToStart || waitingToRestart) return; // ignora altri tasti finché non si parte
+      if (waitingToStart || waitingToRestart) return; 
 
       if (fuel <= 0) {
         fuelEmptySound.play();
@@ -117,8 +117,8 @@ const lander = document.getElementById("lander");
     });
 
     function update() {
-      if (gameOver) return; // <-- PRIMA controlla se il gioco è finito
-      message.textContent = ''; // <-- POI cancella il messaggio solo se il gioco continua
+      if (gameOver) return; 
+      message.textContent = ''; 
       let acc = gravity;
       if (engineOn && fuel > 0) {
         acc += thrust;
@@ -155,8 +155,10 @@ const lander = document.getElementById("lander");
           r1.right > r2.left
         ) {
           collisionSound.play();
-          message.textContent = "Hai colpito un asteroide!";
+          message.innerHTML = "<span style='color:red;'>Hai colpito un asteroide!</span>";
+          message.innerHTML += '<br><span id="restart-hint" style="font-size:0.7em;color:#fff;font-family:\'Press Start 2P\',monospace;">Premere INVIO per ricominciare</span>';
           gameOver = true;
+          waitingToRestart = true;
           engineSound.pause();
           return;
         }
@@ -175,6 +177,7 @@ const minPosition = (surfaceHeight / window.innerHeight) * 100;
         // La navicella ha toccato o superato il terreno
         position = minPosition;
         gameOver = true;
+        waitingToRestart = true;
         engineSound.pause();
         const landingPosition = lander.offsetLeft + lander.offsetWidth / 2;
         const targetCenter = target.offsetLeft + target.offsetWidth / 2;
@@ -185,11 +188,13 @@ const minPosition = (surfaceHeight / window.innerHeight) * 100;
           message.style.color = "yellow";
           message.style.fontSize = "2.5em";
           score = Math.max(0, 100 - (distance / 5));
+          message.innerHTML += '<br><span id="restart-hint" style="font-size:0.7em;color:#fff;font-family:\'Press Start 2P\',monospace;">Premere INVIO per ricominciare</span>';
         } else {
           message.textContent = "MISSION FAILED";
           message.style.color = "red";
           message.style.fontSize = "2.5em";
           score = 0;
+          message.innerHTML += '<br><span id="restart-hint" style="font-size:0.7em;color:#fff;font-family:\'Press Start 2P\',monospace;">Premere INVIO per ricominciare</span>';
         }
         scoreDisplay.textContent = score.toFixed(0);
       }
@@ -208,7 +213,7 @@ const minPosition = (surfaceHeight / window.innerHeight) * 100;
     }
 
     function resetLander() {
-      position = 90;
+      position = 70; // era 90
       speed = 0;
       horizontalSpeed = 0;
       fuel = 100;
@@ -217,8 +222,8 @@ const minPosition = (surfaceHeight / window.innerHeight) * 100;
       movingRight = false;
       gameOver = false;
       score = 0;
-      waitingToStart = true; // il gioco aspetta la pressione di spazio
-      waitingToRestart = false; // resetta l'attesa di riavvio
+      waitingToStart = true;
+      waitingToRestart = false;
 
       // Posiziona il lander centrato orizzontalmente
       lander.style.left = (window.innerWidth / 2 - lander.offsetWidth / 2) + "px";
@@ -230,16 +235,26 @@ const minPosition = (surfaceHeight / window.innerHeight) * 100;
       engineDisplay.textContent = 'OFF';
       message.textContent = 'Premi SPAZIO per iniziare!';
       message.style.fontSize = "1.5em";
-      message.style.color = "#fff"; // <--- aggiungi questa riga
+      message.style.color = "#fff";
       scoreDisplay.textContent = '0';
 
       // Reset target e asteroidi
       targetPosition = Math.random() * 80 + 10;
       target.style.left = targetPosition + "%";
       createAsteroids();
+
+      // Avvia animazione asteroidi anche qui
+      animateAsteroids();
     }
+
+    function animateAsteroids() {
+  if (!waitingToStart) return;
+  moveAsteroids();
+  requestAnimationFrame(animateAsteroids);
+}
 
     function startGame() {
       resetLander();
+      animateAsteroids();
       // NON chiamare update qui!
     }

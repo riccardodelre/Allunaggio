@@ -23,31 +23,31 @@ body {
     }
 
     #lander {
-      width: 60px;
-      height: 120px;
+      width: 45px;    /* era 60px */
+      height: 90px;   /* era 120px */
       position: absolute;
-      bottom: 90%;
+      bottom: 70%;    /* abbassato per vederlo intero */
       left: 50%;
       transform: translateX(-50%);
       background: white;
       border-radius: 50% 50% 20% 20%;
-      border: 5px solid #FF4D4D;
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+      border: 3.75px solid #FF4D4D; /* era 5px */
+      box-shadow: 0 0 11.25px rgba(255, 255, 255, 0.3); /* era 15px */
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
     #window {
-      width: 20px;
-      height: 20px;
+      width: 13.5px;    /* era 18px */
+      height: 13.5px;   /* era 18px */
       background: #0cf;
       border-radius: 50%;
       position: absolute;
-      top: 25px;
+      top: 10px;        /* adattato */
       left: 50%;
       transform: translateX(-50%);
-      box-shadow: 0 0 8px #0cf;
+      box-shadow: 0 0 6px #0cf; /* era 8px */
     }
 
     #flame, .side-flame {
@@ -60,23 +60,28 @@ body {
     }
 
     #flame {
-      width: 30px;
-      height: 50px;
-      bottom: -50px;
+      width: 13.5px;    /* era 18px */
+      height: 20.25px;  /* era 27px */
+      bottom: -20.25px; /* era -27px */
       left: 50%;
       transform: translateX(-50%);
-      box-shadow: 0 0 15px orange;
+      box-shadow: 0 0 11.25px orange; /* era 15px */
     }
 
     .side-flame {
-      width: 20px;
-      height: 40px;
-      bottom: -10px;
-      box-shadow: 0 0 10px red;
+      width: 6.75px;    /* già ridotto */
+      height: 13.5px;   /* già ridotto */
+      bottom: -10px;   /* abbassato rispetto a prima */
+      box-shadow: 0 0 7.5px red;
     }
 
-    #left-flame { left: -25px; }
-    #right-flame { right: -25px; }
+    #left-flame {
+      left: -6px;       /* spostato più verso l'esterno rispetto al centro */
+    }
+    #right-flame {
+      left: auto;
+      right: -14px;      /* spostato più verso l'esterno rispetto al centro */
+    }
 
     @keyframes flicker {
       0% { transform: scaleY(1) scaleX(1) translateX(-50%); opacity: 1; }
@@ -85,24 +90,24 @@ body {
     }
 
     .fin {
-      width: 25px;
-      height: 35px;
+      width: 14px;      /* era 18.75px */
+      height: 19.7px;   /* era 26.25px */
       background: red;
       position: absolute;
-      bottom: 15px;
-      box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
-      border-radius: 6px;
+      bottom: 8.5px;    /* era 11.25px */
+      box-shadow: 0 0 7.5px rgba(255, 0, 0, 0.7); /* era 10px */
+      border-radius: 3.4px; /* era 4.5px */
     }
 
     /* Sinistra: ruota verso sinistra */
     #fin-left {
-      left: -22px;
+      left: -12.5px;    /* era -16.5px */
       transform: rotate(45deg);    /* Da -45deg a 45deg: verso il basso a sinistra */
     }
 
     /* Destra: ruota verso destra */
     #fin-right {
-      right: -22px;
+      right: -12.5px;   /* era -16.5px */
       transform: rotate(-45deg);   /* Da 45deg a -45deg: verso il basso a destra */
     }
 
@@ -120,12 +125,12 @@ body {
       position: absolute;
       bottom: 80px; /* deve essere uguale all'altezza del terreno */
       left: 50%;
-      width: 80px;
+      width: 100px;
       height: 20px;
-      background: #666;
+      background: #62fc67;
       border: 2px solid #aaa;
       text-align: center;
-      color: white;
+      color: rgb(10, 9, 9);
       font-weight: bold;
       font-size: 16px;
       line-height: 20px;
