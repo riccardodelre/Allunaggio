@@ -35,6 +35,7 @@ const lander = document.getElementById("lander");
     let score = 0;
     let fuel = 100;
     let waitingToStart = false; // aggiungi questa variabile globale
+    let waitingToRestart = false; // variabile per gestire l'attesa di riavvio
 
     let targetPosition = Math.random() * 80 + 10;
     target.style.left = targetPosition + "%";
@@ -73,13 +74,22 @@ const lander = document.getElementById("lander");
     let lateralThrust = 0.002;
 
     window.addEventListener("keydown", (e) => {
+      // Se il gioco è finito e si preme INVIO, torna alla schermata di attesa
+      if (waitingToRestart && e.code === "Enter") {
+        waitingToRestart = false;
+        waitingToStart = true;
+        resetLander();
+        return;
+      }
+
+      // Se siamo in attesa di inizio e si preme SPAZIO, parte il gioco
       if (waitingToStart && e.code === "Space") {
         waitingToStart = false;
         engineOn = true;
         requestAnimationFrame(update);
         return;
       }
-      if (waitingToStart) return; // ignora altri tasti finché non si parte
+      if (waitingToStart || waitingToRestart) return; // ignora altri tasti finché non si parte
 
       if (fuel <= 0) {
         fuelEmptySound.play();
@@ -208,6 +218,7 @@ const minPosition = (surfaceHeight / window.innerHeight) * 100;
       gameOver = false;
       score = 0;
       waitingToStart = true; // il gioco aspetta la pressione di spazio
+      waitingToRestart = false; // resetta l'attesa di riavvio
 
       // Posiziona il lander centrato orizzontalmente
       lander.style.left = (window.innerWidth / 2 - lander.offsetWidth / 2) + "px";
